@@ -562,24 +562,26 @@ del_info_type OTA_Protocol_Anylise(u8* buf, u32 len)
 //						system_param.start_time[1] = buf[i + 8];//((buf[i + 8]&0xf0)>>4)*10 + (buf[i + 8]&0x0f);
 //						system_param.start_time[2] = buf[i + 9];//((buf[i + 9]&0xf0)>>4)*10 + (buf[i + 9]&0x0f);
 //						
-//						system_param.led_period_interval[0] = buf[i + 0x0c];
-//						system_param.led_period_interval[1] = buf[i + 0x0b];
-//						system_param.led_period_interval[2] = buf[i + 0x0a];
+						system_param.led_period_interval[0] = buf[i + 0x0c];
+						system_param.led_period_interval[1] = buf[i + 0x0b];
+						system_param.led_period_interval[2] = buf[i + 0x0a];
 //						system_param.RTC_WakeUp_Time = buf[i + 0x0d];
 
 //						
 //						Start_Time.Hours = buf[i + 7];
 //						Start_Time.Minutes = buf[i + 8];
 //						Start_Time.Seconds = buf[i + 9];
-//						Alarm_LED_Period = (buf[i + 0x0c] << 16) | (buf[i + 0x0b] << 8) | buf[i + 0x0a];
+						LED_Period = (buf[i + 0x0c] << 16) | (buf[i + 0x0b] << 8) | buf[i + 0x0a];
 //						RTC_WakeUp_Period = buf[i + 0x0d];
 //						
 //						RTC_Alarm(Start_Time,Alarm_LED_Period);
 //						stm32_Inrtc_EnWakeup(RTC_WakeUp_Period*1000);
-						system_param.led_period_interval[0] = buf[i + 0x09];
-						system_param.led_period_interval[1] = buf[i + 0x08];
-						system_param.led_period_interval[2] = buf[i + 0x07];
-						LED_Period = (buf[i + 0x09] << 16) | (buf[i + 0x08] << 8) | buf[i + 0x07];
+						
+						
+//						system_param.led_period_interval[0] = buf[i + 0x09];
+//						system_param.led_period_interval[1] = buf[i + 0x08];
+//						system_param.led_period_interval[2] = buf[i + 0x07];
+//						LED_Period = (buf[i + 0x09] << 16) | (buf[i + 0x08] << 8) | buf[i + 0x07];
 						app_param_save();//save to flash
 						
 						//ÉèÖÃ»ØÓ¦

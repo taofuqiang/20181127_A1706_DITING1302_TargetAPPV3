@@ -241,7 +241,9 @@ void stm32_flash_RDP(void)
 ***************************************************************************************************/
 int main(void)
 {
+	#ifdef Target_APP
 		SCB->VTOR = FLASH_BASE | 0x10000; 
+	#endif
 		u32 count = 0;
     /* STM32L4xx HAL library initialization:
     - Configure the Flash prefetch

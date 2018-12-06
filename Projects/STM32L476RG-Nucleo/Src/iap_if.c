@@ -213,7 +213,7 @@ void iap_param_default(void)
 	iap_param.version = 0x01;
 	iap_param.IAP_flag = 0x02;
 	iap_param.ID=(iap_param.ChipUniqueID[0]&0xFF)+((iap_param.ChipUniqueID[1]&0xFF)<<8);
-	iap_param.Channel=460;//默认信道30  410+30=440
+	iap_param.Channel=475;//默认信道30  410+30=440
 	iap_param.GatewayID=0x4321;//网关ID
 //	iap_param.Lora_fourth=0x1A;
 //	iap_param.Lora_six=0xC0;//0xC0

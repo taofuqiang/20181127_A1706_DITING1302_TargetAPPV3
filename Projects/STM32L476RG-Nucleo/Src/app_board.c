@@ -298,7 +298,9 @@ void App_Command(void)
 			  Marker_State=State_GPS_Data_Handle;//进入该状态，防止在GPS获取数据时频繁进入低功耗，
 				break;
 			}
+		#ifdef Target_APP
 			Lp_Run();	
+		#endif
 			It_Judge();
 			last_state = State_Lp_Run;
 		}
@@ -951,7 +953,7 @@ void app_param_load(void)
 	start_time[1] = system_param.start_time[1];
 	start_time[2] = system_param.start_time[2];
 	ROOM_TEMPERATURE_PPM = system_param.ROOM_TEMPERATURE_PPM;//RTC校准值从FLASH中读取出来
-	//system_param.softwave_version_marker=0x03;
+	system_param.softwave_version_marker=0x03;
 }
 void app_param_default(void)
 {
@@ -965,8 +967,8 @@ void app_param_default(void)
 	system_param.start_time[1]= 0;
 	system_param.start_time[2]= 0;
 	system_param.led_period_interval[0]= 0x00;//默认闪烁间隔1min闪烁，起始时间00:00:00,亮700ms
-	system_param.led_period_interval[1]= 0x02;
-	system_param.led_period_interval[2]= 0x58;
+	system_param.led_period_interval[1]= 0x00;
+	system_param.led_period_interval[2]= 0x3c;
 	system_param.ROOM_TEMPERATURE_PPM = 82;//RTC  PPM值
 	app_param_save();
 }
@@ -999,8 +1001,8 @@ void It_Judge(void)
 		AlarmA_Interval_Set();
 	  //	LED 闪烁判断结束
 		//  固定时间段修改lora侦听间隔,一天两个时间段,06:00--06:30,18:00--18:30
-		//if(Now_Time_Start == 0 || Now_Time_Start == 21600 || Now_Time_Start == 43200 ||Now_Time_Start == 64800 )
-		if(Now_Time_Start == 1200 || Now_Time_Start == 2400 )
+		if(Now_Time_Start == 0 || Now_Time_Start == 21600 || Now_Time_Start == 43200 ||Now_Time_Start == 64800 )
+		//if(Now_Time_Start == 1200 || Now_Time_Start == 2400 )
 		{  
 			LoRa_Set();//LoRa_Start(&LoRa_PP);//
 			RTC_SyncTime_Last=LoRa_PP.RTCSync_TIME.T.Year+LoRa_PP.RTCSync_TIME.T.Month+LoRa_PP.RTCSync_TIME.T.Day+LoRa_PP.RTCSync_TIME.T.Hour+LoRa_PP.RTCSync_TIME.T.Minute+LoRa_PP.RTCSync_TIME.T.Second+LoRa_PP.RTCSync_TIME.SubSecs;
@@ -1101,7 +1103,9 @@ void It_Judge(void)
 		{
 		  LoRa_Set();//LoRa_Start(&LoRa_PP);//
 		  get_Set_Alarm_Time_AlarmB();
+		#ifdef Target_APP
 			Lp_Run();//进入低功耗1.5s
+		#endif
 		}
 	}
 	if(AlarmB_Flag == 1)

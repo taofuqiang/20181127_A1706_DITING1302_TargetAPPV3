@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'Project' 
- * Target:  'STM32L476RG_NUCLEO' 
+ * Target:  'Target_APP' 
  */
 
 #ifndef RTE_COMPONENTS_H
